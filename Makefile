@@ -1,5 +1,5 @@
 
-DTC ?= dtc
+DTC ?= /opt/ebf-buster-linux/build_image/build/scripts/dtc/dtc
 CPP ?= cpp
 DESTDIR ?=
 

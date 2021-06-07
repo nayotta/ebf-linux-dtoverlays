@@ -1,9 +1,9 @@
 /*
  * Copyright (C) 2019 - All Rights Reserved by 
- * filename : imx-fire-485r1-overlay.dts
+ * filename : imx-fire-485r2-overlay.dts
  * brief : Device Tree overlay for EBF6ull rs485 device
  * author : embedfire
- * date : 2019-12-16 
+ * date : 2019-12-17 
  * version : A001
  */
 
@@ -16,12 +16,12 @@
 
 / {
 	 fragment@0 {
-		target=<&uart2>;
+		target=<&uart7>;
 		__overlay__ {
 					pinctrl-names = "default";
-					pinctrl-0 = <&pinctrl_485r1>;
+					pinctrl-0 = <&pinctrl_485r2>;
 					uart-has-rtscts;
-					rts-gpios = <&gpio1 22 GPIO_ACTIVE_HIGH>;
+					rts-gpios = <&gpio2 15 GPIO_ACTIVE_HIGH>;
 					linux,rs485-enabled-at-boot-time;
 					status = "okay";           
 		};
@@ -29,18 +29,14 @@
 	fragment@1 {
 		target=<&iomuxc>;
 		__overlay__ {
-					pinctrl_485r1: 485r1grp {
+					pinctrl_485r2: 485r2grp {
 						fsl,pins = <
-							MX6UL_PAD_UART2_TX_DATA__UART2_DCE_TX	0x1b0b1
-							MX6UL_PAD_UART2_RX_DATA__UART2_DCE_RX	0x1b0b1
-							MX6UL_PAD_UART2_CTS_B__GPIO1_IO22	0x1b0b1 /* RS485 RE/DE */
+							MX6UL_PAD_ENET2_RX_EN__UART7_DCE_TX	0x1b0b1
+							MX6UL_PAD_ENET2_TX_DATA0__UART7_DCE_RX	0x1b0b1
+							MX6UL_PAD_ENET2_RX_ER__GPIO2_IO15	0x1b0b1 /* RS485 RE/DE */
 						>;
 					};
  
 		};
-	};
-
-	__overrides__ {
-		enable = <&uart2>,"status";
 	};
 };
